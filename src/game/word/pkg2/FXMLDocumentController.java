@@ -30,105 +30,101 @@ import javafx.stage.Stage;
  */
 public class FXMLDocumentController implements Initializable {
     //-----------------------------------------------------------
-    @FXML
-    private TextArea textarea;
-    @FXML
-    private TextField textfield;
-    @FXML
-    private Label label;
+    @FXML private TextArea textarea;
+    @FXML private TextField textfield;
+    @FXML private Label label;
     ArrayList<String> listGame = new ArrayList();
-    ArrayList<String> listGame_word = new ArrayList();
-    String name_file;
+    ArrayList<Word> listGameWord = new ArrayList();
+    String nameFile;
     ListWord listWord = new ListWord();
-    private String name_tema;
+    private String nameTheme;
     private Stage stageMain;
     
     
     @FXML
     private void buttonaction() throws IOException {
-            String player = player_move();
-            if(player.equals(""))
-                return;
-            listGame.add("Вы: " + player);
-            listGame_word.add(player);
-            String computer = computer_move();
-            if (computer.equals(""))
-                player_win();
-            else
-            {
-                listGame.add("Компьютер: " + computer);
-                listGame_word.add(computer);
-            }
-        textarea.setText(print_listGame());
+        String player = player_move();
+        if(player.equals(""))
+            return;
+        listGame.add("Вы: " + player);
+        listGameWord.add(new Word(player));
+        String computer = computer_move();
+        if (computer.equals(""))
+            playerWin();
+        else
+        {
+            listGame.add("Компьютер: " + computer);
+            listGameWord.add(new Word(computer));
+        }
+        textarea.setText(printListGame());
         label.setText("");
         textfield.setText("");
         
     }
     
     private String player_move() throws IOException { 
-            if(listGame_word.isEmpty())
-            {
-               if(listWord.look_for_word(textfield.getText().trim()))
-                    return textfield.getText().trim();
-                else
-                    return add_word();
-            }
+        if(listGameWord.isEmpty())
+        {
+            if(listWord.lookForWord(textfield.getText().trim()))
+                return textfield.getText().trim();
+            else
+                return add_word();
+        }
             else
             {
                 if(textfield.getText().trim().substring(0, 1).toLowerCase().equals
-                    (last_letter(listGame_word.get(listGame_word.size() -1))))
+                    ((listGameWord.get(listGameWord.size() -1).getLastLetter())))
                     if (there_is_listGame(textfield.getText().trim()))
                     {
                         label.setText("Слово '" + textfield.getText().trim() + "' уже было использавано");
                         return ""; 
                     }
                     else
-                       if(!listWord.look_for_word(textfield.getText().trim()))
+                       if(!listWord.lookForWord(textfield.getText().trim()))
                            return add_word();
                        else
                            return textfield.getText().trim();
                 else
                 {
                     label.setText("Слово должно начинаться на букву '" + 
-                        last_letter(listGame_word.get(listGame_word.size() -1)) + "'");
+                        listGameWord.get(listGameWord.size() -1).getLastLetter() + "'");
                     return ""; 
                 }
             }       
     }
     
     private String computer_move() {
-        String prev_word = listGame_word.get(listGame_word.size() - 1);
-        String letter = last_letter(prev_word);
-        return look_for_word(look_for_list_word(letter));
+        String lastLetter = listGameWord.get(listGameWord.size() - 1).getLastLetter();
+        return look_for_word(look_for_list_word(lastLetter));
         
     }
     
-    private String last_letter(String str) {
+    private String lastSymbol(String str) {
          String letter = str.substring(str.length() - 1);
          if (letter.equals("ь") || letter.equals("ъ") || letter.equals("ы") || letter.equals("й") || letter.equals("ё"))
-             return last_letter(str.substring(0, str.length() - 1));
+             return lastSymbol(str.substring(0, str.length() - 1));
          return letter.toLowerCase();
     } 
     
-    private ArrayList<String> look_for_list_word(String letter) {
+    private ArrayList<Word> look_for_list_word(String letter) {
         
-       ArrayList list_word = new ArrayList();
-       listWord.setListWord().stream().filter((u) -> (letter.equals(u.substring(0, 1).toLowerCase()) && !there_is_listGame(u))).forEach((u) -> {
+       ArrayList<Word> list_word = new ArrayList();
+       listWord.setListWord().stream().filter((u) -> (letter.equals(u.getFirstLetter()) && !there_is_listGame(u.getWord()))).forEach((u) -> {
            list_word.add(u);
         });
        return list_word;
    }
     
-    private String print_listGame() {
+    private String printListGame() {
         String str = "";
         str = listGame.stream().map((u) -> u + "\n").reduce(str, String::concat);
         return str;
     }
     
-   private String look_for_word(ArrayList<String> list_word) {
+   private String look_for_word(ArrayList<Word> list_word) {
        Map <Integer, String> map = new Hashtable<Integer, String>();
        list_word.forEach((u) -> {
-           map.put(listWord.amount_word(last_letter(u)),u);
+           map.put(listWord.amount_word(lastSymbol(u.getWord())),u.getWord());
         });
        if (map.isEmpty())
            return "";
@@ -139,7 +135,7 @@ public class FXMLDocumentController implements Initializable {
    }
    
    private boolean there_is_listGame(String str) {
-    return listGame_word.stream().anyMatch((u) -> (u.toLowerCase().equals(str.toLowerCase())));
+    return listGameWord.stream().anyMatch((u) -> (u.getWord().equals(str.toLowerCase())));
 }
    //-----------------------------------------------------------
    //-----------------------------------------------------------
@@ -178,7 +174,7 @@ public class FXMLDocumentController implements Initializable {
         stage.showAndWait();
         System.out.println(controller.getValue());
         listGame.clear();
-        listGame_word.clear();
+        listGameWord.clear();
         name_thema(controller.getValue());
  }
     
@@ -200,7 +196,7 @@ public class FXMLDocumentController implements Initializable {
         
         controller.setStage(stage);
         controller.setTextWord(textfield.getText().trim());
-        controller.setTextTema(name_tema);
+        controller.setTextTema(nameTheme);
         
         stage.showAndWait();
         
@@ -210,26 +206,26 @@ public class FXMLDocumentController implements Initializable {
     }
     
     private void name_thema(String thema) {
-        name_tema = thema;
+        nameTheme = thema;
         switch(thema){
             case "Города России":
-                name_file = "public\\City.txt";
+                nameFile = "public\\City.txt";
                 break;
             case "Животные":
-                name_file = "public\\Animals.txt";
+                nameFile = "public\\Animals.txt";
                 break;
             case "Растения":
-                name_file = "public\\Plants.txt";
+                nameFile = "public\\Plants.txt";
                 break;
             case "Имена":
-                name_file = "public\\Name.txt";
+                nameFile = "public\\Name.txt";
                 break;
         }
-        listWord = new ListWord(name_file);
+        listWord = new ListWord(nameFile);
             
         }
 
-    private void player_win() throws IOException {
+    private void playerWin() throws IOException {
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("WinPlayer.fxml"));
         Parent root = loader.load();

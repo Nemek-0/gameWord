@@ -12,46 +12,48 @@ import java.util.ArrayList;
  * @author ПК-Тащера
  */
 public class ListWord {
-    private ArrayList<String> listWord;
+    private ArrayList<Word> listWord;
     
-    ListWord(String name_file)  {
-        listWord = new My_file().read_file(name_file);
+    ListWord(String nameFile)  {
+        listWord = new ReadFile().readList(nameFile);
     }
 
     ListWord() {
         listWord = new ArrayList();
     }
     
-    public ArrayList<String> setListWord() {
+    public ArrayList<Word> setListWord() {
         return listWord;
     }
     
     public Integer amount_word(String letter) {
         Integer i= 0;
-        for (String u: listWord)
+        for (Word u: listWord)
         {
-            if (letter.equals(u.substring(0, 1).toLowerCase()))
+            if (letter.equals(u.getFirstLetter()))
                 i++;
         }
         return i;
     }
     
-    public boolean look_for_word(String word) {
-        for (String u: this.listWord)
+    public boolean lookForWord(String word) {
+        for (Word u: this.listWord)
         {
-            if (u.toLowerCase().equals(word.toLowerCase()))
+            if (u.getWord().equals(word.toLowerCase()))
                 return true;
         }
         return false;
     }
     
     
-    
+    public void add(Word word){
+        this.listWord.add(word);
+    }
     
     @Override
     public String toString() {
         String str = "";
-        for(String u: listWord) 
+        for(Word u: listWord) 
             str += u + "\n";
     return str;
         

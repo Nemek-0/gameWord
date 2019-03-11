@@ -10,7 +10,6 @@ import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextArea;
 import javafx.stage.Stage;
 
@@ -23,28 +22,25 @@ public class AddWordController implements Initializable {
 
     
     
-    @FXML
-    private Button button_add_word_ok;
-    @FXML
-    private Button button_add_word_cancel;
-    @FXML
-    public TextArea textarea_add_word;
+    @FXML private Button button_add_word_ok;
+    @FXML private Button button_add_word_cancel;
+    @FXML public TextArea textarea_add_word;
     
     
     private String text_word;
     private String text_tema;
     private Stage stage;
-    private boolean response = false;
+    private boolean answer = false;
     
     
     @FXML
     private void button_ok() {
-        response = true;
+        answer = true;
         stage.close();
     }
     @FXML
     private void button_cancel() {
-        response = false;
+        answer = false;
         stage.close();
     }
     
@@ -68,7 +64,7 @@ public class AddWordController implements Initializable {
     }
     
     public boolean getResponse() {
-        return this.response;
+        return this.answer;
     }
     
     

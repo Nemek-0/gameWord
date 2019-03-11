@@ -42,9 +42,9 @@ public class NewGameController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         choiceBox.getItems().add("Города России");
-        choiceBox.getItems().add("Животные");
-        choiceBox.getItems().add("Растения");
-        choiceBox.getItems().add("Имена");
+        //choiceBox.getItems().add("Животные");
+        //choiceBox.getItems().add("Растения");
+        //choiceBox.getItems().add("Имена");
         
     }    
     
