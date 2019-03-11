@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="game.word.pkg2.RuleController">
+   <children>
+      <TextArea editable="false" focusTraversable="false" layoutX="12.0" layoutY="16.0" pickOnBounds="false" prefHeight="331.0" prefWidth="572.0" text="Правила игры в слова&#10;Правила очень простые - первый игрок назвает слово по заданной теме, второй игрок называет слово, первая буква которого совпадает с последней буквой слова, названного первым игроком. Далее третий игрок и т.д по очереди.&#10;Тот, кто не может в течении 30 секунд придумать слово с нужной буквы, выбывает из игры.&#10;&#10;Если названо слово,заканчивающееся на Й, Ы, Ъ, Ь, следущему игроку нужно придумать слово на предпоследню букву. Слова в процессе однного кона игры не должны повторяться.&#10;&#10;Темы могут быть любыми, например: &#10;Города&#10;- ПрагA&#10;- АстрахаНь&#10;- Нью-Йорк&#10;- Казань&#10;- Нижний Новгород&#10;и т.д." wrapText="true" />
+      <Button layoutX="261.0" layoutY="361.0" mnemonicParsing="false" onAction="#w" prefHeight="25.0" prefWidth="62.0" text="Ок" />
+   </children>
+</AnchorPane>

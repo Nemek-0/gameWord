@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.geometry.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" fx:id="anchorpane" pickOnBounds="false" prefHeight="407.0" prefWidth="600.0" snapToPixel="false" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="game.word.pkg2.FXMLDocumentController">
+   <children>
+      <MenuBar fx:id="menubar" layoutX="1.0" layoutY="2.0" prefHeight="25.0" prefWidth="600.0">
+        <menus>
+          <Menu mnemonicParsing="false" text="Игра">
+            <items>
+              <MenuItem mnemonicParsing="false" onAction="#new_game" text="Новая игра" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Помощь">
+            <items>
+              <MenuItem mnemonicParsing="false" onAction="#rule" text="Правила игры" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="О программе">
+            <items>
+              <MenuItem mnemonicParsing="false" text="Автор" />
+            </items>
+          </Menu>
+        </menus>
+      </MenuBar>
+      <TextField fx:id="textfield" alignment="CENTER" layoutX="39.0" layoutY="327.0" onAction="#buttonaction" prefHeight="63.0" prefWidth="407.0" />
+      <Button fx:id="button" alignment="CENTER" layoutX="468.0" layoutY="327.0" mnemonicParsing="false" onAction="#buttonaction" prefHeight="63.0" prefWidth="94.0" text="Button" />
+      <TextArea fx:id="textarea" blendMode="DARKEN" cacheShape="false" centerShape="false" depthTest="ENABLE" editable="false" focusTraversable="false" layoutX="39.0" layoutY="73.0" nodeOrientation="LEFT_TO_RIGHT" pickOnBounds="false" prefHeight="241.0" prefWidth="523.0" wrapText="true" />
+      <Label fx:id="label" ellipsisString="" focusTraversable="false" layoutX="39.0" layoutY="32.0" prefHeight="34.0" prefWidth="523.0" textAlignment="CENTER" textFill="RED" underline="true" wrapText="true">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.geometry.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" pickOnBounds="false" prefHeight="154.0" prefWidth="403.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="game.word.pkg2.AddWordController">
+   <children>
+      <Button fx:id="button_add_word_ok" layoutX="81.0" layoutY="114.0" mnemonicParsing="false" onAction="#button_ok" prefHeight="25.0" prefWidth="58.0" text="Ок" />
+      <Button fx:id="button_add_word_cancel" layoutX="240.0" layoutY="114.0" mnemonicParsing="false" onAction="#button_cancel" text="Отмена" />
+      <TextArea fx:id="textarea_add_word" cacheShape="false" centerShape="false" depthTest="ENABLE" editable="false" focusTraversable="false" layoutX="19.0" layoutY="14.0" nodeOrientation="LEFT_TO_RIGHT" pickOnBounds="false" prefHeight="84.0" prefWidth="367.0" wrapText="true" />
+   </children>
+</AnchorPane>
